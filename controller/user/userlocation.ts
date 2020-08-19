@@ -1,9 +1,10 @@
 const { user_location_statics } = require('../../models');
-require('dotenv').config();
-const axios = require('axios');
 const jwt = require('jsonwebtoken');
-module.exports = {
-  post: async (req, res) => {
+require('dotenv').config();
+import axios from 'axios';
+import express from 'express'
+export = {
+  post: async (req: express.Request, res:express.Response) => {
     //좌표 정보를 가지고 온다..
     let latitude = req.body.latitude;
     let longitude = req.body.longitude;
@@ -18,7 +19,7 @@ module.exports = {
           'Content-Type': 'application/json;charset=UTF-8'
         }
       })
-      .then(result => {
+      .then((result:any) => {
         return result.data;
       });
 
@@ -27,7 +28,8 @@ module.exports = {
       res.status(500);
       res.send('올바른 좌표값이 아닙니다.');
     } else {
-      const token = req.headers.authorization.split(' ')[1];
+      let  token:any = req.headers;
+      token = token.authorization.split(' ')[1];
       // console.log('token~~~~,', token);
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
       let location_data = location.documents[0].address.address_name;

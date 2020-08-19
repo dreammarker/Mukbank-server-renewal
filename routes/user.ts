@@ -1,8 +1,8 @@
-const express = require('express');
 
-const router = express.Router();
+import express from 'express';
 
-const { userController } = require('../controller');
+const router :express.Router = express.Router();
+import userController from '../controller/user/index';
 
 router.get('/info', userController.info.get);
 router.get('/hatefoodSelect', userController.userhatefd.get); //유저가 싫어하는 음식..

@@ -1,10 +1,9 @@
-const jwt = require('jsonwebtoken');
-const { user_like } = require('../../models');
 require('dotenv').config();
 const { sequelize } = require('../../models/index');
-const { QueryTypes } = require('sequelize');
-module.exports = {
-  post: (req, res) => {
+import { QueryTypes } from 'sequelize';
+import express from 'express'
+export = {
+  post: (req:express.Request, res:express.Response) => {
     try {
       let rest_id = req.body.rest_id;
       let query =
@@ -16,14 +15,14 @@ module.exports = {
         .query(query, {
           type: QueryTypes.SELECT
         })
-        .then(result => {
+        .then((result:any) => {
           if (result) {
             res.send(result[0]);
           } else {
             res.send(false);
           }
         })
-        .catch(err => {
+        .catch((err:any) => {
           console.log(err);
         });
     } catch (err) {

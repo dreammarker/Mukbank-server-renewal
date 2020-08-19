@@ -1,14 +1,16 @@
+
 const { sequelize } = require('../../models/index');
 const { QueryTypes } = require('sequelize');
-module.exports = {
+import express from 'express';
+export = {
   //식당정보 및 카페정보 보여주기 식당정보는 사용자가 싫어하는 분류를 필터해서 보여줄수 있다.
-  post: async (req, res) => {
+  post: async (req:express.Request, res:express.Response) => {
     let latitude = req.body.latitude; //짧은게 latitude
     let longitude = req.body.longitude; //긴게 longitude
     let sort = req.body.sort;
     let hatefd_category = req.body.hatefd_category;
     let parent = req.body.parent;
-    let category = false;
+    let category:boolean|string = false;
     let start = req.body.start;
     let end = req.body.end;
     if (hatefd_category) {
@@ -70,7 +72,7 @@ module.exports = {
       .query(query, {
         type: QueryTypes.SELECT
       })
-      .catch(result => {
+      .catch((result:any) => {
         res.status(500);
         res.send('잘못된 접근입니다.');
       });

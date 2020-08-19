@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 // const { user } = require('../../models');
 require('dotenv').config();
-
-module.exports = {
-  get: (req, res) => {
+import express from 'express';
+export = {
+  get: (req:express.Request, res:express.Response) => {
     try {
-      const token = req.headers.authorization.split(' ')[1];
+      let  token:any = req.headers
+      token = token.authorization.split(' ')[1];
       console.log(token);
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
       console.log(userobj);

@@ -2,12 +2,13 @@ const jwt = require('jsonwebtoken');
 // const { user } = require('../../models');
 require('dotenv').config();
 const { sequelize } = require('../../models/index');
-const { QueryTypes } = require('sequelize');
-
-module.exports = {
-  post: async (req, res) => {
+import { QueryTypes } from 'sequelize';
+import express from 'express';
+export = {
+  post: async (req:express.Request, res:express.Response) => {
     try {
-      const token = req.headers.authorization.split(' ')[1];
+      let token:any = req.headers;
+      token = token.authorization.split(' ')[1];
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
       let parent = req.body.parent;
       if (!parent) {
@@ -27,7 +28,7 @@ module.exports = {
           .query(query, {
             type: QueryTypes.SELECT
           })
-          .catch(result => {
+          .catch((result:any) => {
             res.status(500);
             res.send('잘못된 접근입니다.');
           });

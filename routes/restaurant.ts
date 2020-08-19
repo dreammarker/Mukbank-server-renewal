@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 
-const router = express.Router();
+const router :express.Router = express.Router();
 
-const { restaurantController } = require('../controller');
+import restaurantController  from '../controller/restaurant/index';
 
 router.post('/distance', restaurantController.restdistance.post); //식당 거리
 router.post('/distancestartend', restaurantController.distancestend.post); //거리의 시작과끝을 정한 식당정보

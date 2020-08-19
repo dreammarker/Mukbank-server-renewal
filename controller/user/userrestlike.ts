@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const { user_like } = require('../../models');
 require('dotenv').config();
-
-module.exports = {
-  post: async (req, res) => {
+import express from 'express';
+export = {
+  post: async (req:express.Request, res:express.Response) => {
     try {
-      const token = req.headers.authorization.split(' ')[1];
+      let token:any = req.headers;
+      token = token.authorization.split(' ')[1];
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
       const rest_id = req.body.rest_id;
       //user정보 가져오기..
@@ -56,9 +57,10 @@ module.exports = {
       res.send('failed');
     }
   },
-  get: async (req, res) => {
+  get: async (req:express.Request, res:express.Response) => {
     try {
-      const token = req.headers.authorization.split(' ')[1];
+      let token:any = req.headers;
+      token = token.authorization.split(' ')[1];
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
       const rest_id = req.body.rest_id;
       //user정보 가져오기..
@@ -70,10 +72,10 @@ module.exports = {
               rest_id: rest_id
             }
           })
-          .then(result => {
+          .then((result:any) => {
             return result;
           })
-          .catch(err => {
+          .catch((err:any) => {
             console.log(err);
             res.send('usercheck sql error');
           });

@@ -1,9 +1,9 @@
-const restdistance = require('./restdistance');
+import restdistance from './restdistance';
 const fdcategory = require('./fdcategory');
 const distancestend = require('./distancestend');
 const restdetail = require('./restdetail');
 const restlike = require('./restlike');
-module.exports = {
+export = {
   restdistance,
   fdcategory,
   distancestend,

@@ -1,8 +1,8 @@
 const { restaurant_detail } = require('../../models');
-
-module.exports = {
+import express from 'express'
+export = {
   //식당정보 및 카페정보 보여주기 식당정보는 사용자가 싫어하는 분류를 필터해서 보여줄수 있다.
-  post: async (req, res) => {
+  post: async (req:express.Request, res:express.Response) => {
     let rest_id = req.body.rest_id;
     try {
       restaurant_detail
@@ -11,10 +11,10 @@ module.exports = {
             rest_id: rest_id
           }
         })
-        .then(result => {
+        .then((result:any) => {
           res.send(result);
         })
-        .catch(err => {
+        .catch((err:any) => {
           console.log(err);
           res.end('restdeatil.sql error');
         });

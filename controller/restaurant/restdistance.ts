@@ -1,15 +1,16 @@
 const { sequelize } = require('../../models/index');
-const { QueryTypes } = require('sequelize');
-module.exports = {
+import { QueryTypes } from 'sequelize';
+import express from 'express'
+export = {
   //식당정보 및 카페정보 보여주기 식당정보는 사용자가 싫어하는 분류를 필터해서 보여줄수 있다.
-  post: async (req, res) => {
+  post: async (req:express.Request, res: express.Response) => {
     let latitude = req.body.latitude; //짧은게 latitude
     let longitude = req.body.longitude; //긴게 longitude
     let distance = req.body.distance; //거리..
     let sort = req.body.sort;
     let hatefd_category = req.body.hatefd_category;
     let parent = req.body.parent;
-    let category = false;
+    let category:boolean|string = false;
     if (hatefd_category) {
       hatefd_category = hatefd_category.split(',');
       category = 'AND firstchild not IN (';
@@ -67,21 +68,21 @@ module.exports = {
       .query(query, {
         type: QueryTypes.SELECT
       })
-      .catch(result => {
+      .catch(() => {
         res.status(500);
         res.send('잘못된 접근입니다.');
       });
 
     res.send(restaurantdata);
   },
-  paging: async (req, res) => {
+  paging: async (req:express.Request, res:express.Response) => {
     let latitude = req.body.latitude; //짧은게 latitude
     let longitude = req.body.longitude; //긴게 longitude
     let distance = req.body.distance; //거리..
     let sort = req.body.sort;
     let hatefd_category = req.body.hatefd_category;
     let parent = req.body.parent;
-    let category = false;
+    let category:boolean|string = false;
     if (hatefd_category) {
       hatefd_category = hatefd_category.split(',');
       category = 'AND firstchild not IN (';
@@ -138,7 +139,7 @@ module.exports = {
       .query(countquery, {
         type: QueryTypes.SELECT
       })
-      .catch(result => {
+      .catch(() => {
         res.status(500);
         res.send('잘못된 접근입니다.');
       });
@@ -190,7 +191,7 @@ module.exports = {
       .query(query, {
         type: QueryTypes.SELECT
       })
-      .catch(result => {
+      .catch(() => {
         res.status(500);
         res.send('잘못된 접근입니다.');
       });

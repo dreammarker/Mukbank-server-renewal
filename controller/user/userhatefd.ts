@@ -1,15 +1,13 @@
-const { QueryTypes } = require('sequelize');
-const { sequelize } = require('../../models/index');
-const { user, user_hate_food } = require('../../models');
+const { user_hate_food } = require('../../models');
 const jwt = require('jsonwebtoken');
 
-function getKeyByValue(object, value) {
+function getKeyByValue(object:any, value:boolean|string) {
   return Object.keys(object).filter(key => object[key] === value);
 }
-
-module.exports = {
+import express from 'express';
+export = {
   //user의 식당 데이터를 업데이트 및 insert 하는 작업
-  post: async (req, res) => {
+  post: async (req:express.Request, res:express.Response) => {
     // Obj {"일식": true, "한식": false, "중식":true}
     const hatefdObj = req.body.hatefd;
 
@@ -22,7 +20,8 @@ module.exports = {
 
     //토근을 가져온다.
     // let loginobj = req.cookies.loginobj;
-    let token = req.headers.authorization.split(' ')[1];
+    let token:any = req.headers
+    token = token.authorization.split(' ')[1];
 
     //토근을 가지고
     let userobj = jwt.verify(token, process.env.JWT_KEY).data;
@@ -54,8 +53,9 @@ module.exports = {
     }
     res.send('sucees');
   },
-  get: async (req, res) => {
-    let token = req.headers.authorization.split(' ')[1];
+  get: async (req:express.Request, res:express.Response) => {
+    let token:any = req.headers
+    token = token.authorization.split(' ')[1];
 
     //토근을 가지고
     let userobj = jwt.verify(token, process.env.JWT_KEY).data;
