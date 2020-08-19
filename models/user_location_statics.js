@@ -1,4 +1,5 @@
 //* 관계 n 테이블
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const UserLocationSta = sequelize.define(
     'user_location_statics',

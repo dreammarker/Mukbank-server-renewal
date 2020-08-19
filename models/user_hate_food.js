@@ -1,4 +1,5 @@
 //* 다대다 테이블
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const UserHateFood = sequelize.define(
     'user_hate_food',

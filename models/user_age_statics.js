@@ -1,4 +1,5 @@
 //* 관계 n 테이블
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const UserAgeSta = sequelize.define(
     'user_age_statics',

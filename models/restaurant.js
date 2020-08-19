@@ -1,3 +1,4 @@
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Restaurant = sequelize.define(
     'restaurant',
@@ -64,11 +65,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Restaurant.associate = function(models) {
-    Restaurant.hasMany(models.user_select_rest, { foreignKey: 'id' });
-    Restaurant.hasMany(models.user_review, { foreignKey: 'id' });
+    Restaurant.hasMany(models.user_select_rest, { foreignKey: 'rest_id' });
+    Restaurant.hasMany(models.user_review, { foreignKey: 'rest_id' });
     Restaurant.belongsTo(models.food_category, {
       foreignKey: 'fd_category_id'
     });
+    Restaurant.hasMany(models.user_like, { foreignKey: 'rest_id' });
   };
   return Restaurant;
 };

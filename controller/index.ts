@@ -1,8 +1,9 @@
 const helloController = require('./hello');
-const authController = require('./auth');
 const restaurantController = require('./restaurant');
-module.exports = {
+const userController = require('./user');
+
+export = {
   helloController,
-  authController,
-  restaurantController
+  restaurantController,
+  userController
 };

@@ -1,3 +1,4 @@
+
 # Floobits
 .floo
 .floobit
@@ -109,7 +110,7 @@ typings/
 
 # dotenv environment variables file
 .env
-
+/config/config.js
 /config/google.json
 ### Windows ###
 # Windows thumbnail cache files

@@ -1,4 +1,5 @@
 //* 관계 n 테이블
+'use strict';
 module.exports = (sequelize, DataTypes) => {
   const UserGenderSta = sequelize.define(
     'user_gender_statics',
