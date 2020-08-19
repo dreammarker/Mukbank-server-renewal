@@ -6,9 +6,7 @@ export = {
     try {
       let  token:any = req.headers;
       token = token.authorization.split(' ')[1];
-      console.log(token);
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
-      console.log(userobj);
       if (userobj.id) {
         res.json({
           name: userobj.nick,

@@ -6,12 +6,11 @@ import express from 'express'
 export = {
   post: async (req: express.Request, res:express.Response) => {
     //좌표 정보를 가지고 온다..
-    let latitude = req.body.latitude;
-    let longitude = req.body.longitude;
+    let latitude:string = req.body.latitude;
+    let longitude:string = req.body.longitude;
     let url = 'https://dapi.kakao.com/v2/local/geo/coord2address.json';
     url += '?x=' + encodeURI(longitude);
     url += '&y=' + encodeURI(latitude);
-    console.log(url);
     let location = await axios
       .get(url, {
         headers: {

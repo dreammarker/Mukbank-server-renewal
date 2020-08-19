@@ -10,12 +10,12 @@ export = {
       let token:any = req.headers;
       token = token.authorization.split(' ')[1];
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
-      let parent = req.body.parent;
+      let parent:string = req.body.parent;
       if (!parent) {
         parent = '음식점';
       }
       if (userobj.id) {
-        let query =
+        let query:string =
           ' SELECT user_id,rest_id, name,latitude,longitude,fd.parent as parent ,likecheck, rest.image ,fd.firstchild as firstchild, fd.secondchild as secondchild , rest.address as address   ';
         query += ' FROM mukbank.user_likes as likes ';
         query += ' join restaurants as rest on likes.rest_id = rest.id ';

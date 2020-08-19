@@ -9,14 +9,13 @@ export = {
   //user의 식당 데이터를 업데이트 및 insert 하는 작업
   post: async (req:express.Request, res:express.Response) => {
     // Obj {"일식": true, "한식": false, "중식":true}
-    const hatefdObj = req.body.hatefd;
+    const hatefdObj:object = req.body.hatefd;
 
     // ture 인 키만 필터 ["일식","중식"]
-    const filterTrueKey = getKeyByValue(hatefdObj, true);
+    const filterTrueKey:Array<string> = getKeyByValue(hatefdObj, true);
 
     // ["일식","중식"]==> "일식,중식"
-    let hatefd = '' + filterTrueKey;
-    console.log('hatefd: ', hatefd);
+    let hatefd:string = '' + filterTrueKey;
 
     //토근을 가져온다.
     // let loginobj = req.cookies.loginobj;
@@ -25,7 +24,6 @@ export = {
 
     //토근을 가지고
     let userobj = jwt.verify(token, process.env.JWT_KEY).data;
-    console.log('userobj~~', userobj);
     let usercheck = await user_hate_food.findOne({
       where: {
         user_id: userobj.id

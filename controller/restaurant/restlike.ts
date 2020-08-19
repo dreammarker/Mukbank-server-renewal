@@ -6,7 +6,7 @@ export = {
   post: (req:express.Request, res:express.Response) => {
     try {
       let rest_id = req.body.rest_id;
-      let query =
+      let query:string =
         'SELECT rest_id, count(rest_id) as count FROM user_likes where rest_id = ' +
         rest_id +
         ' AND likecheck = 1 group by rest_id';
