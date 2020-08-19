@@ -8,7 +8,7 @@ export = {
       let token:any = req.headers;
       token = token.authorization.split(' ')[1];
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
-      const rest_id = req.body.rest_id;
+      const rest_id:object = req.body.rest_id;
       //user정보 가져오기..
       if (userobj.id) {
         let usercheck = await user_like.findOne({
@@ -62,7 +62,7 @@ export = {
       let token:any = req.headers;
       token = token.authorization.split(' ')[1];
       const userobj = jwt.verify(token, process.env.JWT_KEY).data;
-      const rest_id = req.body.rest_id;
+      const rest_id:object = req.body.rest_id;
       //user정보 가져오기..
       if (userobj.id) {
         let usercheck = await user_like

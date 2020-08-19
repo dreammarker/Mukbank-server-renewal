@@ -107,7 +107,7 @@ export = {
       sort = ' distance, reviewsort';
     }
 
-    let countquery =
+    let countquery:string =
       ' select count(*) as count from ' +
       ' ( SELECT                 ' +
       ' rest.name,              ' +
@@ -144,7 +144,6 @@ export = {
         res.send('잘못된 접근입니다.');
       });
 
-    console.log(count);
     //offset 설정..
     let display = req.body.display;
     let start = req.body.start;
@@ -153,7 +152,7 @@ export = {
     } else {
       start = display * (start - 1);
     }
-    let query =
+    let query:string =
       '  SELECT                 ' +
       ' rest.id  ,              ' +
       ' rest.name,              ' +

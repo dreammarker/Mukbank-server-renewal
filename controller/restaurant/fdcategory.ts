@@ -3,7 +3,7 @@ const { sequelize } = require('../../models/index');
 import express from 'express'
 export = {
   get: (req:express.Request, res:express.Response) => {
-    let query =
+    let query:string =
       'select firstchild from food_categories      ' +
       "where firstchild not like '%null%'          " +
       'group by firstchild                         ';
