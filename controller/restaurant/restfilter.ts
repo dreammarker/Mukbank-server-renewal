@@ -9,15 +9,29 @@ export = {
       let longitude:string = req.body.longitude;//경도
       let paging:number = req.body.paging; //몇페이지?
       let count:number  = req.body.count; //몇개씩 출력할것인가?
-      let filter =  req.body.filter; 
-
+      let filterText:Array<string> =  req.body.filterText.split(","); //
+      
       if(!paging){
           paging = 1;
       }
-      
       if(!count){
           count = 20;
       } 
+      let parent = "'음식점'"
+      let sqlfilter = "";
+      //카페일 경우 카페만 조회
+      if(filterText.find((element:string) => element==='카페')){
+          parent = "'카페'"
+      }
+      else
+      { //아닐 경우에 배열에 있는 모든 한식 , 중식 , 같은 음식 범주를 가져와서 SQL 에 넣을 세부적인 쿼리문을 만든다.
+        sqlfilter+=" AND fd_category.firstchild IN ( ";
+        for (let i = 0; i < filterText.length; i++) {
+          sqlfilter += "'" + filterText[i] + "',";
+        }
+        sqlfilter = sqlfilter.slice(0, -1);
+        sqlfilter += ')';
+      }
 
       let start:number = (paging-1)*count+1;
       let end:number = (paging)*count;
@@ -46,6 +60,9 @@ export = {
         '     restaurants AS rest    ' +
         ' JOIN   food_categories AS fd_category ON rest.fd_category_id = fd_category.id'+
         ' HAVING distance is not null'+
+        ' AND fd_category.parent = '+
+        parent+
+        sqlfilter+
         ' ORDER BY distance'+
         ' limit '+String(start)+' ,'+String(end);
 

@@ -1,14 +1,16 @@
 import restdistance from './restdistance';
-const fdcategory = require('./fdcategory');
-const distancestend = require('./distancestend');
-const restdetail = require('./restdetail');
-const restlike = require('./restlike');
-const restsearch = require('./restsearch');
+import fdcategory   from './fdcategory';
+import distancestend from './distancestend';
+import  restdetail = require('./restdetail');
+import restlike  from './restlike';
+import restsearch from './restsearch';
+import restfilter from './restfilter';
 export = {
   restdistance,
   fdcategory,
   distancestend,
   restdetail,
   restlike,
-  restsearch
+  restsearch,
+  restfilter
 };
