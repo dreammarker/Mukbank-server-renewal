@@ -2,6 +2,7 @@ require('dotenv').config();
 const { sequelize } = require('../../models/index');
 import { QueryTypes } from 'sequelize';
 import express from 'express'
+import { FILE } from 'dns';
 export = {
   post: (req:express.Request, res:express.Response) => {
     try {
@@ -17,21 +18,36 @@ export = {
       if(!count){
           count = 20;
       } 
-      let parent = "'음식점'"
-      let sqlfilter = "";
+      let foodParent = "";
+      let CafeParent = "";
+
+      // AND fd_category.parent = '음식점' AND  fd_category.firstchild  IN ('한식')
+      // OR  fd_category .parent ='카페'
+
       //카페일 경우 카페만 조회
-      if(filterText.find((element:string) => element==='카페')){
-          parent = "'카페'"
+      if(filterText.includes("카페")){
+          if(filterText.length===1){
+            CafeParent = " AND fd_category.parent = '카페'";
+          }
+          else
+          {
+            CafeParent = " OR fd_category.parent='카페'";
+          }
       }
-      else
-      { //아닐 경우에 배열에 있는 모든 한식 , 중식 , 같은 음식 범주를 가져와서 SQL 에 넣을 세부적인 쿼리문을 만든다.
-        sqlfilter+=" AND fd_category.firstchild IN ( ";
+      
+      
+       //아닐 경우에 배열에 있는 모든 한식 , 중식 , 같은 음식 범주를 가져와서 SQL 에 넣을 세부적인 쿼리문을 만든다.
+     filterText = filterText.filter((element:string)=>element!=="카페")
+     if(filterText.length!==0){
+      foodParent += " AND fd_category.parent = '음식점'";
+      foodParent+=" AND fd_category.firstchild IN (";
         for (let i = 0; i < filterText.length; i++) {
-          sqlfilter += "'" + filterText[i] + "',";
+          foodParent += "'" + filterText[i].trim() + "',";
         }
-        sqlfilter = sqlfilter.slice(0, -1);
-        sqlfilter += ')';
+        foodParent = foodParent.slice(0, -1);
+        foodParent += ')';  
       }
+        
 
       let start:number = (paging-1)*count+1;
       let end:number = (paging)*count;
@@ -60,9 +76,8 @@ export = {
         '     restaurants AS rest    ' +
         ' JOIN   food_categories AS fd_category ON rest.fd_category_id = fd_category.id'+
         ' HAVING distance is not null'+
-        ' AND fd_category.parent = '+
-        parent+
-        sqlfilter+
+        foodParent+ 
+        CafeParent+
         ' ORDER BY distance'+
         ' limit '+String(start)+' ,'+String(end);
 
