@@ -26,7 +26,8 @@ export = {
 
       //카페일 경우 카페만 조회
       if(filterText.includes("카페")){
-          if(filterText.length===1){
+          if(filterText.length===1)
+          {
             CafeParent = " AND fd_category.parent = '카페'";
           }
           else

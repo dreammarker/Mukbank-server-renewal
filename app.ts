@@ -69,3 +69,5 @@ app.listen(app.get('port'), function () {
     // eslint-disable-next-line no-console
     console.log("server listen on " + app.get('port') + "...");
 });
+
+export = app;
