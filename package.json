@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production PORT=5001 pm2 start app.js -i 4",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r @babel/register test/server.test.ts"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/codestates/MukBank-server#readme",
   "dependencies": {
+    "@types/chai": "^4.2.12",
     "@types/helmet": "0.0.47",
+    "@types/supertest": "^2.0.10",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -43,12 +45,19 @@
     "winston-daily-rotate-file": "^4.4.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.5.4",
+    "@babel/register": "^7.4.4",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.7",
+    "@types/mocha": "^8.0.3",
     "@types/morgan": "^1.9.1",
     "@types/node": "^14.0.19",
+    "@types/should": "^13.0.0",
     "babel-eslint": "^10.1.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.10.0",
@@ -56,7 +65,13 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
+    "jest": "^26.4.2",
+    "mocha": "^8.1.1",
     "nodemon": "^2.0.2",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
   }
 }
