@@ -45,6 +45,8 @@ export = {
         ' FROM                    ' +
         '     restaurants AS rest    ' +
         ' JOIN   food_categories AS fd_category ON rest.fd_category_id = fd_category.id'+
+        ' WHERE latitude is not NULL '+ 
+        ' AND  longitude is not NULL '+
         ' HAVING distance is not null'+
         ' and name like "%'+ searchText+'%"'+
         ' ORDER BY distance'+
