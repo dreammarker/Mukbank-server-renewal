@@ -1,12 +1,18 @@
-const info = require('./info');
-const userhatefd = require('./userhatefd');
-const userLocation = require('./userlocation');
-const userrestlike = require('./userrestlike');
-const userrestlist = require('./userrestlist');
+import info  from './info';
+import userhatefd  from'./userhatefd';
+import userLocation from './userlocation';
+import userrestlike from './userrestlike';
+import userrestlist from './userrestlist';
+import usersignup from './usersignup';
+import usersignin from './usersignin';
+import userIdCheck from './userIdCheck';
 export = {
   info,
   userhatefd,
   userLocation,
   userrestlike,
-  userrestlist
+  userrestlist,
+  usersignup,
+  usersignin,
+  userIdCheck
 };

@@ -43,7 +43,6 @@ app.get('/logout', function (req : Request, res :Response) {
     res.redirect('/');
 });
 app.use(function (req, res, next) {
-    ;
     var err = {
         status: 404
     };

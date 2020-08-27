@@ -89,5 +89,6 @@ describe('/restaurant/detail POST 요청',function(){
       done();
     })
   })
-})
+});
+
 

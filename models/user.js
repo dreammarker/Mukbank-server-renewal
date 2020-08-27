@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 
       provider: {
         type: DataTypes.STRING(250),
-        allowNull: false
+        allowNull: true
       },
 
       age: {
@@ -40,6 +40,12 @@ module.exports = (sequelize, DataTypes) => {
       userimage: {
         type: DataTypes.STRING,
         allowNull: true
+      },
+      password : {
+        type : DataTypes.STRING
+      },
+      identity: {
+        type : DataTypes.STRING
       }
     },
     {
