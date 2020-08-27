@@ -1,6 +1,5 @@
 
 import express from 'express';
-
 const router :express.Router = express.Router();
 import userController from '../controller/user/index';
 
@@ -11,4 +10,7 @@ router.post('/userlocation', userController.userLocation.post); //유저의 지�
 router.post('/restlikeupdate', userController.userrestlike.post); //유저의 좋아요 update 및 insert
 router.post('/userrestsel', userController.userrestlike.get); //user의 식당별 좋아요 체크
 router.post('/userrestlist', userController.userrestlist.post); //user별로 list
+router.post('/signup',userController.usersignup.post); //회원가입..
+router.post('/signin',userController.usersignin.post); //로그인
+router.post('/idCheck',userController.userIdCheck.post);// 아이디 중복확인.
 module.exports = router;
