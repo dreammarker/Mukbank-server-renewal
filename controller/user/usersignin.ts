@@ -2,13 +2,18 @@ import express from 'express'
 import pdkdf2 from '../../crypto/cipher'
 import func from '../func/idCheck';
 const { user } = require('../../models');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+let options = {
+  expiresIn : '7d',
+  subject:'userinfo'
+}
 //회원가입..
 export = {
     post : async (req : express.Request, res :express.Response)=>{
       let id  =  req.body.id ; 
       let password   =  req.body.password;
       password = pdkdf2(password);
-
       let idcheck = await func.idCheck(id);
       if(!idcheck){
         res.send('없는 아이디거나 잘못된 비밀번호 입니다.')
@@ -24,6 +29,13 @@ export = {
           )
          console.log(userData)
         if(userData){
+          let token = await jwt.sign(userData,process.env.JWT,options,function(err,token){
+            if(err){
+              console.log(err);
+            }  
+            return token;
+          });
+          res.cookie('userToken',token);
           res.send('로그인되었습니다.');
         }
         else {
