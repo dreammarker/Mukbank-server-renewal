@@ -5,7 +5,9 @@ import userrestlike from './userrestlike';
 import userrestlist from './userrestlist';
 import usersignup from './usersignup';
 import usersignin from './usersignin';
+import usersignout from './usersignout';
 import userIdCheck from './userIdCheck';
+import usertokenCheck from './usertokenCheck'
 export = {
   info,
   userhatefd,
@@ -14,5 +16,7 @@ export = {
   userrestlist,
   usersignup,
   usersignin,
-  userIdCheck
+  userIdCheck,
+  usertokenCheck,
+  usersignout
 };

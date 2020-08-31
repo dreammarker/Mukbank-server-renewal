@@ -4,10 +4,6 @@ import func from '../func/idCheck';
 const { user } = require('../../models');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-let options = {
-  expiresIn : '7d',
-  subject:'userinfo'
-}
 //회원가입..
 export = {
     post : async (req : express.Request, res :express.Response)=>{
@@ -27,14 +23,9 @@ export = {
            }).then(
             (result:any) => result.dataValues
           )
-         console.log(userData)
+          
         if(userData){
-          let token = await jwt.sign(userData,process.env.JWT,options,function(err,token){
-            if(err){
-              console.log(err);
-            }  
-            return token;
-          });
+          let token = await jwt.sign(userData,process.env.JWT);
           res.cookie('userToken',token);
           res.send('로그인되었습니다.');
         }
