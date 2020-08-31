@@ -3,9 +3,12 @@ import request from 'supertest'
 import app from '../app';
 import { expect } from 'chai';
 
+const server  = request(app);
+
+
 describe('/hello GET 요청',function(){
   it('/hello',(done)=>{
-    request(app)
+    server
     .get('/hello')
     .end((err,res)=>{
        if(err){
@@ -15,7 +18,7 @@ describe('/hello GET 요청',function(){
        expect(res.text).to.equal("hello world~");
        done();
     })
-});
+  });
 });
 //랜덤이랑
 //회원가입
@@ -23,7 +26,7 @@ describe('/hello GET 요청',function(){
 //그... 30 개뽑아서 랜덤하던가..
 describe('/restaurant/search POST 요청',function(){
   it('/restaurant/search 요청',(done)=>{
-    request(app)
+    server
     .post('/restaurant/search')
     .send({
         "latitude": 37.528526997042,
@@ -34,7 +37,7 @@ describe('/restaurant/search POST 요청',function(){
       if(err){
         done(err);
         return;
-      }
+      } 
       let result = JSON.parse(res.text);
       expect(result.length).to.equal(20); //갯수 확인
       for(let i=0;i<result.length;i++){
@@ -48,7 +51,7 @@ describe('/restaurant/search POST 요청',function(){
 
 describe('/restaurant/selectFilter POST 요청',function(){
   it('/restaurant/selectFilter POST 요청',(done)=>{
-    request(app)
+    server
     .post('/restaurant/selectFilter')
     .send({
       "latitude":  37.570652,
@@ -73,7 +76,7 @@ describe('/restaurant/selectFilter POST 요청',function(){
 
 describe('/restaurant/detail POST 요청',function(){
   it('/restaurant/detail POST 요청',(done)=>{
-    request(app)
+    server
     .post('/restaurant/detail')
     .send({
       "rest_id":  7460
@@ -88,7 +91,56 @@ describe('/restaurant/detail POST 요청',function(){
       expect(result.rest_id===7460).to.equal(true);
       done();
     })
+    
   })
 });
 
+describe('로그인 요청', function(){
+  it('/user/signin POST 요청',(done)=>{
+    server
+    .post('/user/signin')
+    .send({
+      "id":  "maria2",
+      "password": "maria2"
+    })
+    .end((err,res)=>{
+      if(err){
+        done(err);
+        return;
+      }
+      let result: string = res.text;
+      expect(result).to.equal("로그인되었습니다.");
+      done();
+    })
+  })
 
+  it('/user/usertokenCheck GET 요청',(done) => {
+    server
+    .get('/user/usertokenCheck')
+    .end((err,res)=>{
+      if(err){
+        done(err);
+        return;
+      }
+      let result = JSON.parse(res.text);
+      expect(result.token).to.equal(true);
+      done();
+    });
+  });
+
+});
+
+describe('로그아웃',function(){
+  it('/user/signout',(done)=>{
+    server
+    .get('/user/signout')
+    .end((err,res)=>{
+     if(err){
+       done(err);
+       return;
+     }
+     expect(res.text).to.equal('로그아웃 되었습니다.');
+     done();
+    })
+  })
+})

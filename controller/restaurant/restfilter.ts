@@ -10,7 +10,7 @@ export = {
       let longitude:string = req.body.longitude;//경도
       let paging:number = req.body.paging; //몇페이지?
       let count:number  = req.body.count; //몇개씩 출력할것인가?
-      let filterText:Array<string> =  req.body.filterText.split(","); //
+      let filterText:Array<string> =  req.body.filterText.replace(/ /gi,"").split(","); //
       
       if(!paging){
           paging = 1;
@@ -39,6 +39,7 @@ export = {
       
        //아닐 경우에 배열에 있는 모든 한식 , 중식 , 같은 음식 범주를 가져와서 SQL 에 넣을 세부적인 쿼리문을 만든다.
      filterText = filterText.filter((element:string)=>element!=="카페")
+     console.log(filterText)
      if(filterText.length!==0){
       foodParent += " AND fd_category.parent = '음식점'";
       foodParent+=" AND fd_category.firstchild IN (";
