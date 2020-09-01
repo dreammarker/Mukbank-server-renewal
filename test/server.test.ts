@@ -2,6 +2,7 @@
 import request from 'supertest'
 import app from '../app';
 import { expect } from 'chai';
+import { toUnicode } from 'punycode';
 
 const server  = request(app);
 
@@ -72,7 +73,7 @@ describe('/restaurant/selectFilter POST 요청',function(){
       done();
     })
   })
-})
+});
 
 describe('/restaurant/detail POST 요청',function(){
   it('/restaurant/detail POST 요청',(done)=>{
@@ -95,39 +96,27 @@ describe('/restaurant/detail POST 요청',function(){
   })
 });
 
-describe('로그인 요청', function(){
-  it('/user/signin POST 요청',(done)=>{
+describe('/user/signin POST 요청', function(){
+
+  it('/user/signin POST 요청 및 들어가는 토큰체크',(done) => {
     server
     .post('/user/signin')
     .send({
       "id":  "maria2",
       "password": "maria2"
     })
-    .end((err,res)=>{
+    .end((err,res) => {
       if(err){
         done(err);
         return;
       }
       let result: string = res.text;
+      
       expect(result).to.equal("로그인되었습니다.");
-      done();
-    })
-  })
-
-  it('/user/usertokenCheck GET 요청',(done) => {
-    server
-    .get('/user/usertokenCheck')
-    .end((err,res)=>{
-      if(err){
-        done(err);
-        return;
-      }
-      let result = JSON.parse(res.text);
-      expect(result.token).to.equal(true);
+      expect(res.header['set-cookie'][0].includes('userToken')).to.equals(true);
       done();
     });
   });
-
 });
 
 describe('로그아웃',function(){
