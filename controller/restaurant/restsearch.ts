@@ -7,10 +7,10 @@ export = {
     try {
       let latitude:string = req.body.latitude;//위도 
       let longitude:string = req.body.longitude;//경도
-      let searchText:string = req.body.searchText;//무엇으로 검색할거야?
+      let text:string = req.body.text;//무엇으로 검색할거야?
       let paging:number = req.body.paging; //몇페이지?
       let count:number  = req.body.count; //몇개씩 출력할것인가?
-      if(!searchText){
+      if(!text){
           return new Error("searchText를 입력해주세요.");
       }
       if(!paging){
@@ -48,7 +48,7 @@ export = {
         ' WHERE latitude is not NULL '+ 
         ' AND  longitude is not NULL '+
         ' HAVING distance is not null'+
-        ' and name like "%'+ searchText+'%"'+
+        ' and name like "%'+ text+'%"'+
         ' ORDER BY distance'+
         ' limit '+String(count) +' offset '+String(start);
 
