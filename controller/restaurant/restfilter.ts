@@ -10,7 +10,7 @@ export = {
       let longitude:string = req.body.longitude;//경도
       let paging:number = req.body.paging; //몇페이지?
       let count:number  = req.body.count; //몇개씩 출력할것인가?
-      let filterText:Array<string> =  req.body.filterText.replace(/ /gi,"").split(","); //
+      let text:Array<string> =  req.body.text.replace(/ /gi,"").split(","); //
       
       if(!paging){
           paging = 1;
@@ -25,8 +25,8 @@ export = {
       // OR  fd_category .parent ='카페'
 
       //카페일 경우 카페만 조회
-      if(filterText.includes("카페")){
-          if(filterText.length===1)
+      if(text.includes("카페")){
+          if(text.length===1)
           {
             CafeParent = " AND fd_category.parent = '카페'";
           }
@@ -38,13 +38,13 @@ export = {
       
       
        //아닐 경우에 배열에 있는 모든 한식 , 중식 , 같은 음식 범주를 가져와서 SQL 에 넣을 세부적인 쿼리문을 만든다.
-     filterText = filterText.filter((element:string)=>element!=="카페")
-     console.log(filterText)
-     if(filterText.length!==0){
+       text = text.filter((element:string)=>element!=="카페")
+   
+     if(text.length!==0){
       foodParent += " AND fd_category.parent = '음식점'";
       foodParent+=" AND fd_category.firstchild IN (";
-        for (let i = 0; i < filterText.length; i++) {
-          foodParent += "'" + filterText[i].trim() + "',";
+        for (let i = 0; i < text.length; i++) {
+          foodParent += "'" + text[i].trim() + "',";
         }
         foodParent = foodParent.slice(0, -1);
         foodParent += ')';  
