@@ -83,7 +83,7 @@ export = {
         foodParent+ 
         CafeParent+
         ' ORDER BY distance'+
-        ' limit '+String(start)+' ,'+String(end);
+        ' limit '+String(count) +' offset '+String(start);
 
       sequelize
         .query(query, {
