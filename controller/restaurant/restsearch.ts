@@ -50,7 +50,7 @@ export = {
         ' HAVING distance is not null'+
         ' and name like "%'+ searchText+'%"'+
         ' ORDER BY distance'+
-        ' limit '+String(start)+' ,'+String(end);
+        ' limit '+String(count) +' offset '+String(start);
 
       sequelize
         .query(query, {
