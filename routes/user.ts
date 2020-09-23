@@ -15,4 +15,5 @@ router.post('/signin',userController.usersignin.post); //로그인
 router.post('/idCheck',userController.userIdCheck.post);// 아이디 중복확인.
 router.get('/usertokenCheck',userController.usertokenCheck.get); //userToken체크
 router.get('/signout',userController.usersignout.get); //로그아웃
+router.post('/NameCheck',userController.userNameCheck.post) //닉네임 중복체크
 module.exports = router;
