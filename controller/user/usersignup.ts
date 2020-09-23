@@ -11,8 +11,22 @@ export = {
       password = pdkdf2(password);
 
       let idcheck = await func.idCheck(id);
+      let NameCheck = await func.NameCheck(nickname);
+      if(idcheck && NameCheck){
+        let object:any = { id: false, nickname: false};
+        object = JSON.stringify(object);
+        res.status(409).send(object);
+      }
+
       if(idcheck){
-        res.send('이미 가입된 아이디 입니다.')
+        let object:any = {  id: false,   nickname: true}
+        object = JSON.stringify(object);
+        res.status(409).send(object);
+      }
+      else if(NameCheck){
+        let object:any = {  id: true,   nickname: false};
+        object = JSON.stringify(object);
+        res.status(409).send(object);
       }
       else{
         user.create({
