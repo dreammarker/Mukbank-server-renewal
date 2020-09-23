@@ -8,6 +8,7 @@ import usersignin from './usersignin';
 import usersignout from './usersignout';
 import userIdCheck from './userIdCheck';
 import usertokenCheck from './usertokenCheck'
+import userNameCheck from './userNameCheck'
 export = {
   info,
   userhatefd,
@@ -18,5 +19,6 @@ export = {
   usersignin,
   userIdCheck,
   usertokenCheck,
-  usersignout
+  usersignout,
+  userNameCheck
 };

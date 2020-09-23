@@ -1,6 +1,6 @@
 import express from 'express'
 import pdkdf2 from '../../crypto/cipher'
-import func from '../func/idCheck';
+import func from '../func/DuCheck';
 const { user } = require('../../models');
 //회원가입..
 export = {

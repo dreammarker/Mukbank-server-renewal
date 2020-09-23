@@ -1,6 +1,6 @@
 import express from 'express'
 import pdkdf2 from '../../crypto/cipher'
-import func from '../func/idCheck';
+import func from '../func/DuCheck';
 const { user } = require('../../models');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();

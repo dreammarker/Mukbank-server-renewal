@@ -8,5 +8,13 @@ export = {
               }
           })
         return check;
+    },
+    NameCheck : async (name:string) => {
+        let check = await user.findOne({
+            where :  {
+                nick : name
+            }
+        })
+        return check;
     }
 }
