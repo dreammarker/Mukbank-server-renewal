@@ -12,7 +12,9 @@ export = {
       password = pdkdf2(password);
       let idcheck = await func.idCheck(id);
       if(!idcheck){
-        res.send('없는 아이디거나 잘못된 비밀번호 입니다.')
+        let object:any = {  id: false,   nickname: true}
+        object = JSON.stringify(object);
+        res.status(409).send(object);
       }
       else{
         let userData = await user.findOne({
@@ -21,11 +23,11 @@ export = {
             password: password
           }
            }).then(
-            (result:any) => result.dataValues
+            (result:any) => result
           )
-          
+        
         if(userData){
-          let token = await jwt.sign(userData,process.env.JWT);
+          let token = await jwt.sign(userData.dataValues,process.env.JWT);
           res.cookie('userToken',token);
           res.send('로그인되었습니다.');
         }
