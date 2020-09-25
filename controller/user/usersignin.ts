@@ -1,39 +1,35 @@
-import express from 'express'
-import pdkdf2 from '../../crypto/cipher'
+import express from 'express';
+import pdkdf2 from '../../crypto/cipher';
 import func from '../func/DuCheck';
 const { user } = require('../../models');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 //회원가입..
 export = {
-    post : async (req : express.Request, res :express.Response)=>{
-      let id  =  req.body.id ; 
-      let password   =  req.body.password;
-      password = pdkdf2(password);
-      let idcheck = await func.idCheck(id);
-      if(!idcheck){
-        let object:any = {  id: false,   nickname: true}
-        object = JSON.stringify(object);
-        res.status(409).send(object);
-      }
-      else{
-        let userData = await user.findOne({
-          where : {
-            identity : id,
+  post: async (req: express.Request, res: express.Response) => {
+    let id = req.body.id;
+    let password = req.body.password;
+    password = pdkdf2(password);
+    let idcheck = await func.idCheck(id);
+    if (!idcheck) {
+      res.send('없는 아이디거나 잘못된 비밀번호 입니다.');
+    } else {
+      let userData = await user
+        .findOne({
+          where: {
+            identity: id,
             password: password
           }
-           }).then(
-            (result:any) => result
-          )
-        
-        if(userData){
-          let token = await jwt.sign(userData.dataValues,process.env.JWT);
-          res.cookie('userToken',token);
-          res.send('로그인되었습니다.');
-        }
-        else {
-          res.send('없는 아이디거나 잘못된 비밀번호 입니다.');
-        }
+        })
+        .then((result: any) => result);
+
+      if (userData) {
+        let token = await jwt.sign(userData.dataValues, process.env.JWT);
+        res.cookie('userToken', token);
+        res.send('로그인되었습니다.');
+      } else {
+        res.send('없는 아이디거나 잘못된 비밀번호 입니다.');
       }
     }
-}
+  }
+};
