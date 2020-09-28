@@ -5,9 +5,9 @@ import express from 'express';
 export = {
   post: async (req:express.Request, res:express.Response) => {
     try {
-      let token:any = req.headers;
-      token = token.authorization.split(' ')[1];
-      const userobj = jwt.verify(token, process.env.JWT_KEY).data;
+
+      let token = req.cookies.userToken;
+      const userobj = await jwt.verify(token, (process.env.JWT))
       const rest_id:object = req.body.rest_id;
       //user정보 가져오기..
       if (userobj.id) {
@@ -25,7 +25,6 @@ export = {
           } else if (usercheck.dataValues.likecheck === true) {
             check = false;
           }
-          console.log('datavalues' + usercheck.dataValues.id);
           //update ...
           user_like.update(
             {
@@ -59,9 +58,9 @@ export = {
   },
   get: async (req:express.Request, res:express.Response) => {
     try {
-      let token:any = req.headers;
-      token = token.authorization.split(' ')[1];
-      const userobj = jwt.verify(token, process.env.JWT_KEY).data;
+      let token = req.cookies.userToken;
+      const userobj = await jwt.verify(token, (process.env.JWT))
+      console.log(userobj)
       const rest_id:object = req.body.rest_id;
       //user정보 가져오기..
       if (userobj.id) {

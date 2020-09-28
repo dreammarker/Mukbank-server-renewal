@@ -7,9 +7,9 @@ import express from 'express';
 export = {
   post: async (req:express.Request, res:express.Response) => {
     try {
-      let token:any = req.headers;
-      token = token.authorization.split(' ')[1];
-      const userobj = jwt.verify(token, process.env.JWT_KEY).data;
+      let token = req.cookies.userToken;
+      const userobj = await jwt.verify(token, (process.env.JWT))
+      console.log(userobj)
       let parent:string = req.body.parent;
       if (!parent) {
         parent = '음식점';
