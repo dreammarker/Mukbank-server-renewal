@@ -86,7 +86,7 @@ export = {
         res.send('userid가 없습니다.');
       }
     } catch (err) {
-      res.send('failed');
+      console.log(err)
     }
   }
 };
