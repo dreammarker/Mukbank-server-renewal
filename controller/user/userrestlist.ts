@@ -28,7 +28,6 @@ export = {
             type: QueryTypes.SELECT
           })
           .catch((result:any) => {
-            res.status(500);
             res.send('잘못된 접근입니다.');
           });
 
