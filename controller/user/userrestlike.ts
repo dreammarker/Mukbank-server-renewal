@@ -49,7 +49,7 @@ export = {
         }
       } else {
         console.log('wrong');
-        res.status(400).send('wrong');
+        res.send('wrong');
       }
     } catch (err) {
       console.log(err);
@@ -81,10 +81,10 @@ export = {
         if (usercheck) {
           res.send(usercheck.dataValues.likecheck);
         } else {
-          res.status(400).send(false);
+          res.send(false);
         }
       } else {
-        res.status(400).send('userid가 없습니다.');
+        res.send('userid가 없습니다.');
       }
     } catch (err) {
       console.log(err);
