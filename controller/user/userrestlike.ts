@@ -60,8 +60,7 @@ export = {
     try {
       let token = req.cookies.userToken;
       const userobj = await jwt.verify(token, (process.env.JWT))
-      console.log(userobj)
-      const rest_id:object = req.body.rest_id;
+      const rest_id:any = req.query.rest_id;
       //user정보 가져오기..
       if (userobj.id) {
         let usercheck = await user_like
