@@ -8,7 +8,7 @@ router.get('/hatefoodSelect', userController.userhatefd.get); //유저가 싫어
 router.post('/hatefoodUpdate', userController.userhatefd.post); //유저가 싫어하는 카테고리 선택시 분류해서 입력.
 router.post('/userlocation', userController.userLocation.post); //유저의 지역정보 위치
 router.post('/restlikeupdate', userController.userrestlike.post); //유저의 좋아요 update 및 insert
-router.get('/userrestsel', userController.userrestlike.get); //user의 식당별 좋아요 체크
+router.post('/userrestsel', userController.userrestlike.post2); //user의 식당별 좋아요 체크
 router.post('/userrestlist', userController.userrestlist.post); //user별로 list
 router.post('/signup',userController.usersignup.post); //회원가입..
 router.post('/signin',userController.usersignin.post); //로그인

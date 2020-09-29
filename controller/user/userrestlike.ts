@@ -56,11 +56,11 @@ export = {
       res.send('failed');
     }
   },
-  get: async (req:express.Request, res:express.Response) => {
+  post2: async (req:express.Request, res:express.Response) => {
     try {
       let token = req.cookies.userToken;
       const userobj = await jwt.verify(token, (process.env.JWT))
-      const rest_id:any = req.query.rest_id;
+      const rest_id:any = req.body.rest_id;
       //user정보 가져오기..
       if (userobj.id) {
         let usercheck = await user_like
