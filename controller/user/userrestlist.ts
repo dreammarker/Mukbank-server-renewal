@@ -9,7 +9,6 @@ export = {
     try {
       let token = req.cookies.userToken;
       const userobj = await jwt.verify(token, (process.env.JWT))
-      console.log(userobj)
       let parent:string = req.body.parent;
       if (!parent) {
         parent = '음식점';
@@ -36,7 +35,7 @@ export = {
         res.send(likedata);
       } else {
         console.log('wrong');
-        res.status(400).send('wrong');
+        res.send('wrong');
       }
     } catch (err) {
       console.log(err);
