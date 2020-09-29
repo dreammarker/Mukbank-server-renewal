@@ -76,7 +76,6 @@ export = {
           })
           .catch((err:any) => {
             console.log(err);
-            res.send('usercheck sql error');
           });
         if (usercheck) {
           res.send(usercheck.dataValues.likecheck);
@@ -87,8 +86,7 @@ export = {
         res.send('userid가 없습니다.');
       }
     } catch (err) {
-      console.log(err);
-      res.send('failed');
+      console.log(err)
     }
   }
 };
