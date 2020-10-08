@@ -16,7 +16,7 @@ export = {
           type: QueryTypes.SELECT
         })
         .then((result:any) => {
-          if (result) {
+          if (result.length!==0) {
             res.send(result[0]);
           } else {
             res.send(false);
