@@ -5,6 +5,7 @@ import  restdetail = require('./restdetail');
 import restlike  from './restlike';
 import restsearch from './restsearch';
 import restfilter from './restfilter';
+import restfilersearch from './restfilersearch'
 export = {
   restdistance,
   fdcategory,
@@ -12,5 +13,6 @@ export = {
   restdetail,
   restlike,
   restsearch,
-  restfilter
+  restfilter,
+  restfilersearch
 };
