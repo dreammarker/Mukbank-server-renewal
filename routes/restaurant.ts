@@ -12,4 +12,5 @@ router.post('/restlike', restaurantController.restlike.post); //한식당의 lik
 router.post('/restpaging', restaurantController.restdistance.paging); //paging
 router.post('/search',restaurantController.restsearch.post); //search 검색 
 router.post('/selectFilter',restaurantController.restfilter.post); // filter 기능
+router.post('/restfilersearch',restaurantController.restfilersearch.post);//필터와 search를 결합시킴
 module.exports = router;
