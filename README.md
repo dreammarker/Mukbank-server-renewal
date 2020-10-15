@@ -36,8 +36,3 @@ FACEBOOK_SECRET=
 
 ![](./images/erd.png)
 
-
-## api 문서
-
-https://docs.google.com/document/d/1kWHbf8rqpopScbrCbGnFZ_C_q-G5fcjgIA7nCddCbEc/edit
-
