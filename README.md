@@ -32,6 +32,8 @@ FACEBOOK_ID=
 FACEBOOK_SECRET=
 ```
 
+pm2 start ts-node -- -P tsconfig.server.json app.ts
+
 ## ERD 데이터베이스 설계
 
 ![](./images/erd.png)
